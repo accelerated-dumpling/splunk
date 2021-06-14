@@ -8,7 +8,7 @@
 ### configure SSL
 TODO: find article that identifies usage of 2 different types of cert \
 ref: https://docs.splunk.com/Documentation/Splunk/8.2.0/Security/SecureSplunkWebusingasignedcertificate \
-ref: https://docs.splunk.com/Documentation/Splunk/8.2.0/Security/ConfigureSplunkforwardingtousesignedcertificates \
+ref: https://docs.splunk.com/Documentation/Splunk/8.2.0/Security/ConfigureSplunkforwardingtousesignedcertificates
 
 1) Ensure ca chain cert path is correct otherwise certificate may not have worked properly and data to indexers may not work.
 2) data certificate uses a different cert to configure different set of encryption algorithms for efficient usage of host resources
