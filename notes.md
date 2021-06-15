@@ -11,6 +11,17 @@ Checksum on checking changed data ( CHECK_METHOD )
 Source type configuration (sourcetype, invalid_cause, is_valid, unarchive_cmd, unarchive_sourcetype, LEARN_SOURCETYPE, LEARN_MODEL, maxDist, MORE_THAN, LESS_THAN)
 
 
+ref: https://wiki.splunk.com/Community:HowIndexingWorks
+ - Input    : Inputs data from source. Source-wide keys, such as source/sourcetypes/hosts, are annotated here. 
+              The output of these pipelines are sent to the parsingQueue.
+ - Parsing  : Parsing of UTF8 decoding, Line Breaking, and header is done here. This is the first place to split data stream into a single line event. 
+              Note that in a UF/LWF, this parsing pipeline does "NOT" do parsing jobs. 
+ - Merging  : Line Merging for multi-line events and Time Extraction for each event are done here.
+ - Typing   : Regex Replacement, Punct. Extractions are done here.
+ - IndexPipe: Tcpout to another Splunk, syslog output, and indexing are done here.
+              In addition, this pipeline is responsible for bytequota, block signing, and indexing metrics such as thruput etc.
+
+
 ### DA vs SA vs TA
 ref: https://dev.splunk.com/enterprise/docs/devtools/enterprisesecurity/abouttheessolution/
 
