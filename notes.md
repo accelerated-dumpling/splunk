@@ -1,4 +1,6 @@
 
+ref:https://wiki.splunk.com/Where_do_I_configure_my_Splunk_settings%3F
+
 ### DA vs SA vs TA
 ref: https://dev.splunk.com/enterprise/docs/devtools/enterprisesecurity/abouttheessolution/
 
