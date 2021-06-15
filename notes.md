@@ -2,13 +2,13 @@
 ref:https://wiki.splunk.com/Where_do_I_configure_my_Splunk_settings%3F \
 ref: https://docs.splunk.com/Documentation/Splunk/6.5.2/Admin/propsconf
 
-At first read ( CHARSET, CHECK_FOR_HEADER, INDEX_EXTRACTIONS, PREAMBLE_REGEX, FIELD_HEADER_REGEX, HEADER_FIELD_LINE_NUMBER, FIELD_DELIMETER, HEADER_FIELD_DELIMTER, FIELD_QUOTE, HEADER_FIELD_QUOTE, FIELD_NAMES, MISSING_VALUE_REGEX, JSON_TRIM_BRACES_IN_ARRAY_NAMES  )
-Linebreaking happens at parsing ( LINE_BREAKER, TRUNCATE).
-Line Merging happens at merging ( BREAK_ONLY_BEFORE, MUST_BREAK_AFTER, SHOULD_LINEMERGE).
-Timestamping happens at typing ( DATETIME_CONFIG, TIME_FORMAT, TIME_PREFIX, MAX_TIMESTAMP_LOOKAHEAD)
-When processing binary files ( NO_BINARY_CHECK, detect_trailing_nulls )
-Checksum on checking changed data ( CHECK_METHOD )
-Source type configuration (sourcetype, invalid_cause, is_valid, unarchive_cmd, unarchive_sourcetype, LEARN_SOURCETYPE, LEARN_MODEL, maxDist, MORE_THAN, LESS_THAN)
+* At first read ( CHARSET, CHECK_FOR_HEADER, INDEX_EXTRACTIONS, PREAMBLE_REGEX, FIELD_HEADER_REGEX, HEADER_FIELD_LINE_NUMBER, FIELD_DELIMETER, HEADER_FIELD_DELIMTER, FIELD_QUOTE, HEADER_FIELD_QUOTE, FIELD_NAMES, MISSING_VALUE_REGEX, JSON_TRIM_BRACES_IN_ARRAY_NAMES  )
+* Linebreaking happens at parsing ( LINE_BREAKER, TRUNCATE). 
+* Line Merging happens at merging ( BREAK_ONLY_BEFORE, MUST_BREAK_AFTER, SHOULD_LINEMERGE).
+* Timestamping happens at typing ( DATETIME_CONFIG, TIME_FORMAT, TIME_PREFIX, MAX_TIMESTAMP_LOOKAHEAD)
+* When processing binary files ( NO_BINARY_CHECK, detect_trailing_nulls )
+* Checksum on checking changed data ( CHECK_METHOD )
+* Source type configuration (sourcetype, invalid_cause, is_valid, unarchive_cmd, unarchive_sourcetype, LEARN_SOURCETYPE, LEARN_MODEL, maxDist, MORE_THAN, LESS_THAN)
 
 
 ref: https://wiki.splunk.com/Community:HowIndexingWorks
