@@ -76,7 +76,23 @@ index=*
 ```
 | eval t_indextime=strftime(_indextime,"%Y-%m-%d %H:%M:%S"),t_time=strftime(_time,"%Y/%m/%d %H:%M:%S"),t_delay = _indextime - _time | search t_delay > 100
 ```
-
+### User disk usage
+```
+	| rest splunk_server=local /services/search/jobs | eval diskUsageMB=diskUsage/1024/1024 | rename eai:acl.owner as UserName | stats sum(diskUsageMB) as totalDiskUsage by UserName
+ ```
+ 
+ ```
+ index=_audit search_id="*" sourcetype=audittrail action=search info=granted 
+| table _time host user action info search_id search ttl 
+| join search_id 
+    [ search index=_internal sourcetype=splunkd quota component=DispatchManager log_level=WARN reason="The maximum disk usage quota*" 
+    | dedup search_id 
+    | table _time host sourcetype log_evel component username search_id, reason 
+    | eval search_id = "'" + search_id + "'" 
+        ]
+| table _time host user action info search_id search ttl reason
+```
+ 
 ### Make fake results
 ```
 | makeresults 
