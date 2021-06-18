@@ -48,6 +48,10 @@ index=*
 | tstats count where index=* by index _time span=1h prestats=t 
 | timechart span=1h count by index useother=f
 ```
+### get logged in users
+```
+| rest /services/authentication/httpauth-tokens splunk_server=local | stats max(updated) by userName
+```
 
 ### Get sourcetypes by index
 ```
