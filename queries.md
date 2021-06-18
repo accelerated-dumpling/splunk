@@ -78,7 +78,7 @@ index=*
 ```
 ### User disk usage
 ```
-	| rest splunk_server=local /services/search/jobs | eval diskUsageMB=diskUsage/1024/1024 | rename eai:acl.owner as UserName | stats sum(diskUsageMB) as totalDiskUsage by UserName
+| rest splunk_server=local /services/search/jobs | eval diskUsageMB=diskUsage/1024/1024 | rename eai:acl.owner as UserName | stats sum(diskUsageMB) as totalDiskUsage by UserName
  ```
  
  ```
