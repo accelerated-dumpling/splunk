@@ -223,3 +223,10 @@ For each datamodel and tag run (constraings[].search):
     | `filter_rare_process_whitelist` 
     | table process ]
 ```
+
+### get AD DN activity (rw) by user
+```
+index=oswinsec EventCode=5136
+| bin _time span=5m
+| stats count by _time gpo_obj_dn user
+```
