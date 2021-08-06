@@ -230,3 +230,14 @@ index=oswinsec EventCode=5136
 | bin _time span=5m
 | stats count by _time gpo_obj_dn user
 ```
+
+### kv store metrics
+```
+| rest /services/server/introspection/kvstore/collectionstats
+| mvexpand data
+| spath input=data
+| rex field=ns "(?<App>.*)\.(?<Collection>.*)"
+| eval dbsize=round(size/1024/1024, 2)
+| eval indexsize=round(totalIndexSize/1024/1024, 2)
+| stats first(count) AS "Number of Objects" first(nindexes) AS Accelerations first(indexsize) AS "Acceleration Size (MB)" first(dbsize) AS "Collection Size (MB)" by App, Collection
+```
