@@ -6,3 +6,9 @@
 
 ### check kvstore status
 `/opt/splunk/bin/splunk show kvstore-status`
+
+### check certificate information
+`openssl x509 -in cert.pem -text`
+
+check the enddate of the cert
+`openssl x509 -in cert.pem -enddate -noout`
