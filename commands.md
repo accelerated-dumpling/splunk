@@ -7,6 +7,13 @@
 ### check kvstore status
 `/opt/splunk/bin/splunk show kvstore-status`
 
+### clean kvstore (remove everything)
+```
+./splunk stop
+./splunk clean kvstore --local
+./splunk start
+```
+
 ### check certificate information
 `openssl x509 -in cert.pem -text`
 
