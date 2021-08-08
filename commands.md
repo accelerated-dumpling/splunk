@@ -17,5 +17,5 @@
 ### check certificate information
 `openssl x509 -in cert.pem -text`
 
-check the enddate of the cert
+check the enddate of the cert<br />
 `openssl x509 -in cert.pem -enddate -noout`
