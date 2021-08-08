@@ -251,3 +251,18 @@ startwebserver = false
 ### indexer
 * attached to cluster master
 * gets apps from cluster master
+
+## configure ms-windows-ad-objects
+extremely useful in a ms environment
+
+### redo baseline from AD
+inputs.conf
+```
+[admon:newCollection]
+baseline=1
+disabled=0
+targetDC = "myAD"
+#may need to have targetDC in all caps = MYAD
+index=appmsadmon
+monitorSubtree=1
+```
