@@ -46,7 +46,7 @@ index=*
 ### Compare yesterday's data with today
 ```
 index=oswinsec earliest=-1d@d 
-| eval day=if(date_mday=strftime(now(),"%d"), "today", "yesterday") 
+| eval day=if(_time<relative_time(now(),"@d"),"yesterday","today")
 | stats count(eval(day="yesterday")) as yesterday count(eval(day="today")) as today by host
 ```
 
