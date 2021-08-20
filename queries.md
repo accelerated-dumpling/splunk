@@ -43,6 +43,13 @@ index=*
  | stats sum(raw_len) as Bytes sum(raw_len_kb) as KB sum(raw_len_mb) as MB sum(raw_len_gb) as GB by index
 ```
 
+### Compare yesterday's data with today
+```
+index=oswinsec earliest=-1d@d 
+| eval day=if(date_mday=strftime(now(),"%d"), "today", "yesterday") 
+| stats count(eval(day="yesterday")) as yesterday count(eval(day="today")) as today by host
+```
+
 ### create a table of events by index for each hour for visualization
 ```
 | tstats count where index=* by index _time span=1h prestats=t 
