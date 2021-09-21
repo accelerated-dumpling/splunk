@@ -162,7 +162,7 @@ index=main sourcetype=stoq
 
 ### Windows - Get logins by login type
 ```
-index=oswinsec EventCode=4624
+index=oswinsec EventCode=4624 user!=DWM-* user!=UMFD-*
 | eval LogonType=case(Logon_Type="2", "Local Console Access", Logon_Type="3", "Accessing Network Folders or Files", Logon_Type="4", "Scheduled Task, Batch File, or Script", Logon_Type="5", "Service Account", Logon_Type="7", "Local Console Unlock", Logon_Type="8", "Network User Logon", Logon_Type="9", "Program launched with RunAs using /netonly switch", Logon_Type="10", "Remote Desktop via Terminal Services", Logon_Type="11", "Mobile Access or Network Domain Connection Resumed") 
 | table _time host user LogonType
 ```
