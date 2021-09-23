@@ -78,6 +78,18 @@ index=*
 | stats  avg(latency), min(latency), max(latency) by sourcetype
 ```
 
+### compare todays (last 24h) event count by host to last week's
+```
+index=oswinsec earliest=-1d
+| append 
+    [ search index=oswinsec earliest=-8d latest=-7d ] 
+| eval type=if(relative_time(now(), "-1d@d") > _time, "lastweek","now") 
+| stats count by host type
+| chart sum(count) as count by host type 
+| fillnull value="0"
+| sort - lastweek
+```
+
 ### Get index time (default is event time)
 ```
 | eval indextime=strftime(_indextime,"%Y-%m-%d %H:%M:%S")
