@@ -90,6 +90,8 @@ index=oswinsec earliest=-1d
 | sort - lastweek
 ```
 
+Note: chart's syntax is: [ BY <row-split> <column-split> ] OR [ OVER <row-split> ] [BY <column-split>] ]. So in this case stats shows that each host is EITHER lastweek or now and there's a count. Chart will take the information and set the rows based on **hosts** and column of **type** with the sum at each "cell".
+
 ### Get index time (default is event time)
 ```
 | eval indextime=strftime(_indextime,"%Y-%m-%d %H:%M:%S")
