@@ -122,3 +122,8 @@ ref: https://docs.splunk.com/Documentation/Splunk/8.2.0/Knowledge/Searchtimeoper
 6. LOOKUP
 7. eventtypes.conf
 8. tags.conf
+
+#### nullQueue
+ref: https://docs.splunk.com/Documentation/Splunk/8.2.2/Forwarding/Routeandfilterdatad
+
+Need to put the nullqueue stanza and transform name *BEFORE* the regular parsing. If it is applied at the end (left to right, right being end; stanza at the bottom of transform), then REGEX will throw it to nullqueue *FIRST* then the other transform stanzas get executed.
