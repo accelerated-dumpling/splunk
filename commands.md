@@ -21,4 +21,4 @@ check the enddate of the cert<br />
 `openssl x509 -in cert.pem -enddate -noout`
 
 ### show decrypted
-./splunk show-decrypted --value '<value>'
+`./splunk show-decrypted --value '<value>'`
