@@ -23,6 +23,22 @@ index=_internal source=*license_usage.log TERM(type=Usage) earliest=-7d@d latest
 | sort idx 
 ```
 
+### get ufw version installed
+```
+index=_internal group=tcpin_connections version=* fwdType=uf 
+| stats max(version) as version by hostname sourceIp guid build os arch 
+| table hostname,sourceIp,guid,version,build,os,arch 
+```
+
+OR
+
+```
+index=_internal group=tcpin_connections version=* fwdType=uf 
+| dedup hostname
+| table hostname,sourceIp,guid,version,build,os,arch 
+```
+
+
 ### Get host log usage
 ```
 index=_internal source=*license_usage.log type=Usage 
