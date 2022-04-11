@@ -23,6 +23,13 @@ index=_internal source=*license_usage.log TERM(type=Usage) earliest=-7d@d latest
 | sort idx 
 ```
 
+### get logged in users
+```
+index=_internal sourcetype=splunkd_ui_access 
+| dedup host user 
+| table host user _time req_time logged in users rolling time
+```
+
 ### get ufw version installed
 ```
 index=_internal group=tcpin_connections version=* fwdType=uf 
