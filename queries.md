@@ -188,7 +188,7 @@ index=main sourcetype=stoq
 
 ###  Get admins from Domain admins group via MS AD Objects
 ```
-| inputlookup AD_Groups_LDAP_list 
+| inputlookup AD_Obj_User 
 | search cn="*domain admin*" OU="Domain admins" 
 | table member 
 | makemv delim="CN=" member 
