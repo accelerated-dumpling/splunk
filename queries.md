@@ -304,3 +304,4 @@ This query modifies the data prior to it, outputs to the lookup and then discard
  | where a=b
 ]
 ```
+Note: the condition `a=b` is never true thus invalidates this whole portion and nothing actually gets appended to the parent query.
