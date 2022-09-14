@@ -292,7 +292,7 @@ index=oswinsec EventCode=5136
 | stats first(count) AS "Number of Objects" first(nindexes) AS Accelerations first(indexsize) AS "Acceleration Size (MB)" first(dbsize) AS "Collection Size (MB)" by App, Collection
 ```
 
-### appendpipe / outputlookup
+### updating lookup inline with appendpipe
 This query modifies the data prior to it, outputs to the lookup and then discards the data modified then continues on the query as if the appendpipe portion never happens. This is useful for performing any adhoc updates to lookups inline instead of creating a separate search for it.
 ```
 <query>
