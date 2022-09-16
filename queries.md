@@ -331,3 +331,21 @@ For example April 1st - Prank1:20, Prank2:30, Prank3:2, April 2nd - Prank1:4, Pr
 | stats count by _time description
 | chart sum(count) as count over _time by description
 ```
+
+Or
+
+```
+<query>
+| timechart count by description
+```
+
+
+### subtracting values from different stat rows
+```
+<query>
+| stats count by description
+| transpose header_field=description
+| eval DescriptionX=DescriptionX-Description1
+| transpose header_filed=column
+| rename column as description
+```
