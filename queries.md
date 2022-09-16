@@ -308,7 +308,7 @@ Note: the condition `a=b` is never true thus invalidates this whole portion and 
 
 
 ### merge/summarize/consolidate data 
-If a log source splits information into separate events but you need to join them together for subsequent queries. You can use transaction, currency or stats. The following uses stats to join the information on a common field, user. 
+If a log source splits information into separate events but you need to join them together for subsequent queries. You can use **transaction**, **currency** or **stats**. The following uses stats to join the information on a common field, *user*. 
 ```
 <query>
 | stats values(*) as * by _time user
