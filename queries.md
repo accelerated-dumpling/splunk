@@ -305,3 +305,29 @@ This query modifies the data prior to it, outputs to the lookup and then discard
 ]
 ```
 Note: the condition `a=b` is never true thus invalidates this whole portion and nothing actually gets appended to the parent query.
+
+
+### merge/summarize/consolidate data 
+If a log source splits information into separate events but you need to join them together for subsequent queries. You can use transaction, currency or stats. The following uses stats to join the information on a common field, user. 
+```
+<query>
+| stats values(*) as * by _time user
+```
+
+The assumption is that each "session" has the same timestamp just split into individual events. If there is a difference of some time between the events you can collect them together.
+
+```
+<query>
+| bin _time span=10s
+| stats values(*) as * by _time user
+```
+
+
+### prepare stats data for graphing
+Results from stats will net you three columns, \_time, count and field. 
+For example April 1st - Prank1:20, Prank2:30, Prank3:2, April 2nd - Prank1:4, Prank2:5 etc...
+```
+<query>
+| stats count by _time description
+| chart sum(count) as count over _time by description
+```
