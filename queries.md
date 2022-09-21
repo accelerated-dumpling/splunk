@@ -66,6 +66,21 @@ index=*
  | stats sum(raw_len) as Bytes sum(raw_len_kb) as KB sum(raw_len_mb) as MB sum(raw_len_gb) as GB by index
 ```
 
+### get forwarder versions
+```
+index=_internal source=*metrics.log group=tcpin_connections 
+| eval sourceHost=if(isnull(hostname), sourceHost,hostname) 
+| rename connectionType as connectType 
+| eval connectType=case(fwdType=="uf","univ fwder", fwdType=="lwf", "lightwt fwder",fwdType=="full", "heavy fwder", connectType=="cooked" or connectType=="cookedSSL","Splunk fwder", connectType=="raw" or connectType=="rawSSL","legacy fwder") 
+| eval version=if(isnull(version),"pre 4.2",version) 
+| rename version as Ver 
+| fields connectType sourceIp sourceHost destPort kb tcp_eps tcp_Kprocessed tcp_KBps splunk_server Ver 
+| eval Indexer= splunk_server 
+| eval Hour=relative_time(_time,"@h") 
+| stats avg(tcp_KBps) sum(tcp_eps) sum(tcp_Kprocessed) sum(kb) by Hour connectType sourceIp sourceHost destPort Indexer Ver 
+| fieldformat Hour=strftime(Hour,"%x %H") 
+```
+
 ### Compare yesterday's data with today
 ```
 index=oswinsec earliest=-1d@d 
