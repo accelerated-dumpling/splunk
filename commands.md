@@ -22,3 +22,9 @@ check the enddate of the cert<br />
 
 ### show decrypted
 `./splunk show-decrypted --value '<value>'`
+
+
+### ACL on /var/log 
+` setfacl -R -m u:splunk:r /var/log`
+
+Note: may need to install *acl* packages
