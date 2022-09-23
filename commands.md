@@ -25,6 +25,6 @@ check the enddate of the cert<br />
 
 
 ### ACL on /var/log 
-` setfacl -R -m u:splunk:r /var/log`
+` setfacl -R -m u:splunk:rx /var/log`
 
 Note: may need to install *acl* packages
