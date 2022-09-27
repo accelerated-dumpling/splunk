@@ -23,6 +23,30 @@ index=_internal source=*license_usage.log TERM(type=Usage) earliest=-7d@d latest
 | sort idx 
 ```
 
+### datamodel sizes
+```
+| rest servicesNS/-/-/data/models 
+| search acceleration="1" 
+| table title eai:appName eai:userName 
+| rename eai:appName AS name 
+| eval myDatamodel="DM_" . name . "_" . title 
+| map search="|rest /servicesNS/nobody/-/admin/summarization/tstats:$myDatamodel$ splunk_server=local" 
+| table eai:acl.app,eai:acl.owner, summary.id, summary.size 
+| rename eai:acl.app as app eai:acl.owner as owner summary.size as size summary.id as datamodel 
+| eval sizeMB=round(size/1000000,2) 
+| fields - size 
+| addcoltotals sizeMB
+```
+OR
+
+```
+((`cim_Alerts_indexes`) tag=alert) OR ((`cim_Application_State_indexes`) (tag=listening tag=port) OR (tag=process tag=report) OR (tag=service tag=report)) OR ((`cim_Authentication_indexes`) tag=authentication NOT (action=success user=*$)) OR ((`cim_Certificates_indexes`) tag=certificate) OR ((`cim_Change_indexes`) tag=change NOT (object_category=file OR object_category=directory OR object_category=registry)) OR ((`cim_Change_Analysis_indexes`) tag=change) OR ((`cim_Compute_Inventory_indexes`) tag=inventory (tag=cpu OR tag=memory OR tag=network OR tag=storage OR (tag=system tag=version) OR tag=user OR tag=virtual)) OR ((`cim_Databases_indexes`) tag=database) OR ((`cim_DLP_indexes`) tag=dlp tag=incident) OR (index=whois sourcetype=Whois:*) OR ((`cim_Email_indexes`) tag=email) OR ((`cim_Event_Signatures_indexes`) tag=track_event_signatures (signature=* OR signature_id=*)) OR (`get_notable_index`) OR ((`cim_Interprocess_Messaging_indexes`) tag=messaging) OR ((`cim_Intrusion_Detection_indexes`) tag=ids tag=attack) OR ((`cim_JVM_indexes`) tag=jvm) OR ((`cim_Malware_indexes`) tag=malware tag=attack) OR ((`cim_Network_Resolution_indexes`) tag=network tag=resolution tag=dns) OR ((`cim_Network_Sessions_indexes`) tag=network tag=session) OR ((`cim_Network_Traffic_indexes`) tag=network tag=communicate) OR (index=pci* EventCode=4663) OR ((`cim_Performance_indexes`) tag=performance (tag=cpu OR tag=facilities OR tag=memory OR tag=storage OR tag=network OR (tag=os ((tag=time tag=synchronize) OR tag=uptime)))) OR (index=risk) OR (index=threat_activity) OR ((`cim_Ticket_Management_indexes`) tag=ticketing) OR ((`cim_Updates_indexes`) tag=update tag=status) OR ((`cim_Vulnerabilities_indexes`) tag=vulnerability tag=report) OR ((`cim_Web_indexes`) tag=web)
+| eval raw_size=len(_raw)
+| stats sum(raw_size) as totalSize_B
+| eval totalSize_GB=totalSize_B/1024/1024/1024
+| fields totalSize_GB
+```
+
 ### get logged in users
 ```
 index=_internal sourcetype=splunkd_ui_access 
