@@ -1,9 +1,98 @@
 ## Setting up environment
-1. license master
-2. deployment server
-3. cluster master
-4. indexer(s)
-5. search head(s)
+1. server
+2. license master
+3. deployment server
+4. cluster master
+5. indexer(s)
+6. search head(s)
+
+### Server
+Configure OS
+
+ref: https://www.citrusconsulting.com/how-to-setup-your-linux-os-for-splunk-installation-correctly/
+
+#### Add ulimits
+/etc/security/limits.conf
+```
+splunk hard core 0
+splunk hard maxlogins 10
+splunk soft nofile 65535
+splunk hard nofile 65535
+splunk soft nproc 20480
+splunk hard nproc 20480
+splunk soft fsize unlimited
+splunk hard fsize unlimited
+```
+
+#### THP Transparent Huge Pages
+/etc/rc.d/rc.local
+
+```
+#SPLUNK: disable THP at boot time
+THP=`find /sys/kernel/mm/ -name transparent_hugepage -type d | tail -n 1`
+for SETTING in "enabled" "defrag";do
+    if test -f ${THP}/${SETTING}; then
+        echo never > ${THP}/${SETTING}
+    fi
+done
+
+```
+
+#### configure visudo
+add splunk
+
+OR
+`usermod -aG sudo <user>`
+
+#### disable selinux
+/etc/selinux/config
+
+`SELINUX=permissive`
+
+
+#### opt: add remote partitions if needed
+/etc/fstab
+```
+<ip>:<path>   /frozen         nfs     defaults        0 0
+```
+
+#### opt: configure firewall
+```
+firewall-cmd --list-ports
+firewall-cmd --permanent --add-port={8000/tcp,9887/tcp,9998/tcp,9997/tcp,8443/tcp,8089/tcp,22/tcp}
+firewall-cmd --sudo reload
+```
+
+#### boot on start
+```
+su root
+/opt/splunk/bin/splunk enable boot-start -user splunk
+```
+
+may need to link
+`ln -s /etc/rc.d/init.d/ /etc/init.d/`
+
+##### verify splunk startup user
+/opt/splunk/etc/splunk-launch.conf
+`SPLUNK_OS_USER=splunk`
+
+
+
+#### Indexes for Splunk 9+
+Splunk 9 uses a new index called \_configtracker
+
+
+```
+[default]
+repFactor = auto
+
+[_introspection]
+repFactor = 0
+
+[_configtracker]
+repFactor = 0
+```
+
 
 ### configure SSL
 TODO: find article that identifies usage of 2 different types of cert \
