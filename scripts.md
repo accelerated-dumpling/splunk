@@ -1,6 +1,6 @@
 # Scripts
 
-Scripts shared from jimmyatSplunk
+Scripts shared from jimmyatSplunk \
 ref: https://gist.githubusercontent.com/jimmyatSplunk
 
 
