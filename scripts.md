@@ -330,9 +330,9 @@ alias deploy_apps='cd /opt/splunk/etc/deployment-apps'
 alias deploy_reload='/opt/splunk/bin/splunk reload deploy-server'
 
 # Indexer cluster commands
-alias master_apps='cd /opt/splunk/etc/master-apps'
-alias master_apps='cd /opt/splunk/etc/manager-apps'
-alias master_apps='cd /opt/splunk/etc/peer-apps'
+alias masterapps='cd /opt/splunk/etc/master-apps'
+alias managerapps='cd /opt/splunk/etc/manager-apps'
+alias peerapps='cd /opt/splunk/etc/peer-apps'
 alias validate_cluster_bundle='/opt/splunk/bin/splunk validate cluster-bundle'
 alias apply_cluster_bundle='/opt/splunk/bin/splunk apply cluster-bundle'
 
