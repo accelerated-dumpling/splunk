@@ -28,3 +28,13 @@ check the enddate of the cert<br />
 ` setfacl -R -m u:splunk:rx /var/log`
 
 Note: may need to install *acl* packages
+
+
+### clean index
+for troubleshooting
+
+```
+./splunk stop
+./splunk clean eventdata -index <index>
+./splunk start
+```
