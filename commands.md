@@ -31,7 +31,6 @@ Note: may need to install *acl* packages
 
 
 ### clean index
-for troubleshooting
 
 ```
 ./splunk stop
