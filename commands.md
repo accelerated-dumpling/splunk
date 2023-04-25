@@ -4,6 +4,16 @@
 ### list output configuration on splunk host/client (for troubleshooting)
 `/opt/splunk/bin/splunk btool outputs list --debug`
 
+### stale pid file
+occasionally you'll get the error:
+
+> couldn't send SIGTERM to pid 2972: Operation not permitted
+> Couldn't send SIGTERM to some splunk helpers. [FAILED]
+> Error: Unable to stop splunk helpers.
+
+You'll need to remove the stale pid at `$SPLUNK_HOME/var/run/splunk/splunkd.pid`
+
+
 ### check kvstore status
 `/opt/splunk/bin/splunk show kvstore-status`
 
