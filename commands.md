@@ -7,7 +7,7 @@
 ### stale pid file
 occasionally you'll get the error:
 
-&nbsp; couldn't send SIGTERM to pid 2972: Operation not permitted
+&nbsp; couldn't send SIGTERM to pid 2972: Operation not permitted  
 &nbsp; Couldn't send SIGTERM to some splunk helpers. [FAILED]
 &nbsp; Error: Unable to stop splunk helpers.
 
