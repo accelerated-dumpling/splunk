@@ -388,3 +388,9 @@ Or
 | transpose header_filed=column
 | rename column as description
 ```
+
+### converting windows timestamp to readable
+```
+eval LastLogonDate=strftime(LastLogonDate/1000,"%+")
+```
+
