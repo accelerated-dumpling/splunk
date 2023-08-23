@@ -127,3 +127,11 @@ ref: https://docs.splunk.com/Documentation/Splunk/8.2.0/Knowledge/Searchtimeoper
 ref: https://docs.splunk.com/Documentation/Splunk/8.2.2/Forwarding/Routeandfilterdatad
 
 Need to put the nullqueue stanza and transform name *BEFORE* the regular parsing. If it is applied at the end (left to right, right being end; stanza at the bottom of transform), then REGEX will throw it to nullqueue *FIRST* then the other transform stanzas get executed.
+
+### html tags on email alert
+ref: https://community.splunk.com/t5/Alerting/Is-there-a-way-to-change-the-font-size-or-bold-text-in-alert/m-p/247638
+ref: https://dev.splunk.com/enterprise/docs/developapps/visualizedata/binddatausingtokens/transformandvalidate/
+
+1. edit sendemail.py (`etc/apps/search/bin/sendemail.py`)
+2. find the heading `def htmlMessageTemplate():`
+3. remove `\|h` from `{msg|h}`. The `|h` is a type of sanitization to escape html values
